@@ -1,0 +1,39 @@
+{
+   "interactionModel": {
+      "languageModel": {
+         "invocationName": "your territories",
+         "intents": [
+            {
+               "name": "AMAZON.CancelIntent",
+               "samples": []
+            },
+            {
+               "name": "AMAZON.HelpIntent",
+               "samples": []
+            },
+            {
+               "name": "AMAZON.FallbackIntent",
+               "samples": []
+            },
+            {
+               "name": "AMAZON.NoIntent",
+               "samples": []
+            },
+            {
+               "name": "CongregationCountIntent",
+               "slots": [],
+               "samples": [
+                  "how many congregations are there",
+                  "how many congregations are on your territories dot com",
+                  "give me the count"
+               ]
+            },
+            {
+               "name": "AMAZON.NavigateHomeIntent",
+               "samples": []
+            }
+         ],
+         "types": []
+      }
+   }
+}

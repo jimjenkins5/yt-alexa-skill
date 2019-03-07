@@ -1,0 +1,20 @@
+{
+   "db": {
+      "host": "0.0.0.0",
+      "dialect": "mysql",
+      "database": "DB_NAME",
+      "credentials": {
+         "username": "DB_USERNAME",
+         "password": "DB_PASS"
+      }
+   },
+   "vpc": {
+      "securityGroupIds": [ "sg-xxxxxxxx" ],
+      "subnetIds": [
+         "subnet-xxxxxxxx",
+         "subnet-xxxxxxxx",
+         "subnet-xxxxxxxx"
+      ]
+   },
+   "skillID": "amzn1.ask.skill.XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+}
