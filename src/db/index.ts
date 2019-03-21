@@ -1,30 +1,25 @@
-import { Sequelize } from 'sequelize-typescript';
-import { Congregation } from './models';
-export { Congregation } from './models';
+import sql, { ConnectionPool, IResult } from 'mssql';
 
-// ensure that sequelize get's loaded
-require('sequelize');
+let _connection: ConnectionPool = null;
 
-export const DEFAULT_LIMIT = 50;
+export function getConnection(): Promise<ConnectionPool> {
+   if (_connection) {
+      return Promise.resolve(_connection);
+   }
 
-export const sequelize = new Sequelize({
-   operatorsAliases: false,
-   dialect: process.env.DB_DIALECT,
-   host: process.env.DB_HOST,
-   database: process.env.DB_DATABASE,
-   username: process.env.DB_USERNAME,
-   password: process.env.DB_PASSWORD,
-   /* eslint-disable-next-line no-empty-function */
-   logging: () => {},
+   _connection = new sql.ConnectionPool({
+      server: process.env.DB_HOST,
+      database: process.env.DB_DATABASE,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+   });
 
-   dialectOptions: {
-      decimalNumbers: true,
-   },
+   return _connection.connect();
+}
 
-   define: {
-      timestamps: false,
-      paranoid: false,
-   },
-});
+export async function CongregationCount(): Promise<number> {
+   const db = await getConnection(),
+         countResp: IResult<{ count: number }> = await db.request().query('SELECT count(*) as count FROM Congregation');
 
-sequelize.addModels([ Congregation ]);
+   return countResp.recordset[0].count;
+}

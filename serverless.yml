@@ -7,11 +7,6 @@ plugins:
 
 custom:
    config: ${file(./config/config.js)}
-   webpack:
-      includeModules:
-         forceInclude:
-            - tedious
-
 
 provider:
    name: aws

@@ -1,13 +1,8 @@
 import { HandlerInput, SkillBuilders, ErrorHandler, RequestHandler } from 'ask-sdk-core';
 import { Response, SessionEndedRequest } from 'ask-sdk-model';
-import { Congregation } from './db';
+import { CongregationCount } from './db';
 import { LambdaHandler } from 'ask-sdk-core/dist/skill/factory/BaseSkillFactory';
 
-async function getCount(): Promise<number> {
-   const response = await Congregation.findAndCountAll();
-
-   return response.count;
-}
 
 const congregationCountIntentHandler: RequestHandler = {
    canHandle(handlerInput: HandlerInput): boolean {
@@ -16,7 +11,7 @@ const congregationCountIntentHandler: RequestHandler = {
             && handlerInput.requestEnvelope.request.intent.name === 'CongregationCountIntent');
    },
    async handle(handlerInput: HandlerInput) {
-      const count: number = await getCount(),
+      const count: number = await CongregationCount(),
             speechText = `There are currently ${count} active congregations on your territories dot com.`;
 
       return handlerInput.responseBuilder

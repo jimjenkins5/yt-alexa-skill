@@ -20,7 +20,6 @@ module.exports = {
       path: path.join(__dirname, '.webpack'),
       filename: '[name].js',
    },
-   externals: [ 'sequelize', 'sequelize-typescript' ],
    target: 'node',
    module: {
       rules: [
